@@ -1,11 +1,12 @@
+package named
+
 def FV(t: Term): Set[Var] = t match
   case Var(x) => Set(x)
   case Abs(m, n) => FV(m).union(FV(n))
   case λ(x, p) => FV(p).excl(x)
 
 def NewVar(p: Term, n: Term): Var = 
-  val str = "xyzwabcdef"
-  val varsList = str.map((c) => s"${c}")
+  val varsList = "xyzwabcdef"
   val freeVars = FV(p).union(FV(n))
 
   varsList.filter((c) => !freeVars.contains(c)).head
