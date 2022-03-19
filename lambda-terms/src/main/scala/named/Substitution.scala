@@ -1,24 +1,24 @@
 package named
 
-def FV(t: Term): Set[Var] = t match
+def fV(t: Term): Set[Var] = t match
   case Var(x) => Set(x)
-  case Abs(m, n) => FV(m).union(FV(n))
-  case λ(x, p) => FV(p).excl(x)
+  case Apl(m, n) => fV(m).union(fV(n))
+  case λ(x, p) => fV(p).excl(x)
 
-def NewVar(p: Term, n: Term): Var = 
+def newVar(p: Term, n: Term): Var = 
   val varsList = "xyzwabcdef"
-  val freeVars = FV(p).union(FV(n))
+  val freeVars = fV(p).union(fV(n))
 
   varsList.filter((c) => !freeVars.contains(c)).head
 
-def CurrySub(m: Term, x: Var, n: Term): Term = m match
+def currySub(m: Term, x: Var, n: Term): Term = m match
   case Var(y) =>
     if x == Var(y) then n
     else y
-  case Abs(m1, m2) => Abs(CurrySub(m1, x, n), CurrySub(m2, x, n))
+  case Apl(m1, m2) => Apl(currySub(m1, x, n), currySub(m2, x, n))
   case λ(y, p) => 
     if x == y then λ(x, p)
-    else if (!FV(p).contains(x) || !FV(n).contains(y)) then λ(y, CurrySub(p, x, n))
+    else if (!fV(p).contains(x) || !fV(n).contains(y)) then λ(y, currySub(p, x, n))
     else
-      val z = NewVar(p, n)
-      λ(z, CurrySub(CurrySub(p, y, z), x, n))
+      val z = newVar(p, n)
+      λ(z, currySub(currySub(p, y, z), x, n))

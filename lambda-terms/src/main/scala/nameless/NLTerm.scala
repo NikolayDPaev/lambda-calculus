@@ -1,8 +1,9 @@
 package nameless
+import scala.languageFeature.implicitConversions
 
 trait Term
 object Term:
-  implicit def IntToTerm(n: Int): Term = Var(n)
+  implicit def intToTerm(n: Int): Term = Var(n)
 
 case class Var(n: Int) extends Term:
   override def toString(): String = n.toString
@@ -11,10 +12,10 @@ case class Var(n: Int) extends Term:
   case that: Var => n == that.n
   case _ => false
 object Var:
-  implicit def IntToVar(n: Int): Var = Var(n)
-  implicit def VarToInt(v: Var): Int = v.n
+  implicit def intToVar(n: Int): Var = Var(n)
+  implicit def varToInt(v: Var): Int = v.n
 
-case class Abs(m: Term, n: Term) extends Term:
+case class Apl(m: Term, n: Term) extends Term:
   override def toString(): String = s"(${m}${n})"
 
 case class λ(p:Term) extends Term:
