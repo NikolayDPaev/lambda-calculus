@@ -1,12 +1,13 @@
-val scala3Version = "3.1.1"
+name := "lambda terms"
+version := "0.1"
 
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "lambda terms",
-    version := "0.1.0-SNAPSHOT",
+scalaVersion := "3.1.1"
 
-    scalaVersion := scala3Version,
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "3.2.11" % Test
+)
 
-    libraryDependencies += "org.scalameta" %% "munit" % "0.7.29" % Test
-  )
+scalacOptions ++= Seq(
+  "-new-syntax",
+  "-indent"
+)

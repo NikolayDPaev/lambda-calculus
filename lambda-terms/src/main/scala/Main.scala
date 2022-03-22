@@ -27,3 +27,18 @@ def hello: Unit =
 
   val withoutNames = deleteNames(named.parseString("(λx((xy)((λu((zu)(λv(vy))))z)))"), Array(named.Var('y'), named.Var('x'), named.Var('z')))
   println(addNames(withoutNames, Array(named.Var('y'), named.Var('x'), named.Var('z'))))
+
+  val m = nameless.parseString("(0(λ((01)(λ((01)2)))))")
+  val x = 0
+  val n = nameless.parseString("(2(λ((01)3)))")  
+  val mSubn = nameless.sub(m, x, n)
+
+  val m1 = addNames(m, Array(named.Var('y'), named.Var('x'), named.Var('z')))
+  val n1 = addNames(n, Array(named.Var('y'), named.Var('x'), named.Var('z')))
+  val m1Subn1 = named.currySub(m1, 'y', n1)
+  
+  println(mSubn)
+  println(deleteNames(m1Subn1, Array(named.Var('y'), named.Var('x'), named.Var('z'))))
+
+  println(deleteNames(named.parseString("(y(λx((xy)(λu((ux)y)))))"), Array(named.Var('y'), named.Var('x'), named.Var('z'))))
+
