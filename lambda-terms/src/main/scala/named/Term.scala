@@ -11,6 +11,7 @@ case class Var(x: Char) extends Term:
   override def equals(obj: Any): Boolean = obj match
   case that: Var => x == that.x
   case _ => false
+
 object Var:
   implicit def charToVar(c: Char): Var = Var(c)
   implicit def varToChar(v: Var): Char = v.x

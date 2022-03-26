@@ -11,6 +11,7 @@ case class Var(n: Int) extends Term:
   override def equals(obj: Any): Boolean = obj match
   case that: Var => n == that.n
   case _ => false
+  
 object Var:
   implicit def intToVar(n: Int): Var = Var(n)
   implicit def varToInt(v: Var): Int = v.n
