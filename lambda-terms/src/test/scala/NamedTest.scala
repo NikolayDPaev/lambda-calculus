@@ -20,8 +20,12 @@ class NamedTest extends AnyFlatSpec with Matchers:
     val t2 = named.parseString("(λy(λx(xy)))")
     val t3 = named.parseString("(λx(λy(yx)))")
     named.areAlphaEq(t2, t3) shouldBe true
-    
     named.areAlphaEq(t, t2) shouldBe false
+    
+    val t4 = named.parseString("(λx(λyx))")
+    val t5 = named.parseString("(λx(λyy))")
+    named.areAlphaEq(t4, t5) shouldBe false
+
   }
 
   "currySub" should "correctly substitute" in {
