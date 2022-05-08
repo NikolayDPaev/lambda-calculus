@@ -7,3 +7,4 @@ Program implementations for the lambda calculus and proof theory course
 - Curry substitution
 - Substitution for nameless terms
 - Translation between named and nameless terms and vice versa
+- Implementation of Normal and Applicative reduction strategies
