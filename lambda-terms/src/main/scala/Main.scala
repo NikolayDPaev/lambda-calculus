@@ -1,5 +1,3 @@
-import scala.runtime.stdLibPatches.language.experimental.namedTypeArguments
-
 @main
 def main(): Unit = 
 
@@ -53,3 +51,10 @@ def main(): Unit =
 
   println("(λy(λx(xy))) and (λx(λy(yx))) should be alpha equivalent")
   println(named.areAlphaEq(named.parseString("(λy(λx(xy)))"), named.parseString("(λx(λy(yx)))")))
+
+
+  println(named.fullReduction(named.normalReduction)(named.parseString("((λxx)(λyy))")))
+  println(named.fullReduction(named.normalReduction)(named.parseString("((λx(λyy))((λzz)(λaa)))")))
+
+  println(named.fullReduction(named.applicativeReduction)(named.parseString("((λxx)(λyy))")))
+  println(named.fullReduction(named.applicativeReduction)(named.parseString("((λx(λyy))((λzz)(λaa)))")))
