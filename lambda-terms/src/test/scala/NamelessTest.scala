@@ -5,8 +5,8 @@ class NamelessTest extends AnyFlatSpec with Matchers:
 
   "parseString" should "should parse a nameless lambda term" in {
     nameless.parseString("(λ(1(λ1)))") shouldBe nameless.λ(nameless.Apl(1, nameless.λ(1)))
-    nameless.parseString("(0(λ((01)(λ((01)2)))))") shouldBe 
-      nameless.Apl(0, nameless.λ(nameless.Apl(nameless.Apl(0,1), nameless.λ(nameless.Apl(nameless.Apl(0,1), 2)))))
+    nameless.parseString("(0(λ((01)(λ((01)2)))))") shouldBe
+      nameless.Apl(0, nameless.λ(nameless.Apl(nameless.Apl(0, 1), nameless.λ(nameless.Apl(nameless.Apl(0, 1), 2)))))
   }
 
   "sub" should "correctly substitute" in {

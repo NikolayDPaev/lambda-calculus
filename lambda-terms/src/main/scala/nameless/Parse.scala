@@ -3,7 +3,7 @@ package nameless
 // string must be in this grammar:
 // L = x | (LL) | (λL)
 // where x is integer
-def parseStringHelper(str: String): (Term, String) = 
+def parseStringHelper(str: String): (Term, String) =
   if str.head != '(' then (Var(str.head - '0'), str.tail)
   else
     val token = str.tail
@@ -18,8 +18,8 @@ def parseStringHelper(str: String): (Term, String) =
         val (n, rest2) = parseStringHelper(rest)
         assert(rest2.head == ')')
         val rest3 = rest2.tail
-        (Apl(m, n), rest3)   
-          
-def parseString(str: String): Term = 
+        (Apl(m, n), rest3)
+
+def parseString(str: String): Term =
   val (term, rest) = parseStringHelper(str)
   term

@@ -14,14 +14,14 @@ def parseStringHelper(str: String): (Term, String) =
         val (p, rest) = parseStringHelper(token.tail.tail)
         assert(!rest.isEmpty && rest.head == ')')
         val rest2 = rest.tail
-        (λ(Var(x),p), rest2)
+        (λ(Var(x), p), rest2)
       case _ =>
         val (m, rest) = parseStringHelper(token)
         val (n, rest2) = parseStringHelper(rest)
         assert(!rest2.isEmpty && rest2.head == ')')
         val rest3 = rest2.tail
-        (Apl(m, n), rest3)   
-          
-def parseString(str: String): Term = 
+        (Apl(m, n), rest3)
+
+def parseString(str: String): Term =
   val (term, rest) = parseStringHelper(str)
   term

@@ -1,10 +1,10 @@
 @main
-def main(): Unit = 
+def main(): Unit =
 
   println("((y(λx((xy)z)))z)[y -> (zy)]")
   println(named.currySub(named.parseString("((y(λx((xy)z)))z)"), 'y', named.parseString("(zy)")))
   println()
- 
+
   println("(y(λx((xy)(λu((ux)y)))))[y -> z(λv vyz)")
   println(named.currySub(named.parseString("(y(λx((xy)(λu((ux)y)))))"), 'y', named.parseString("(z(λv((vy)z)))")))
   println()
@@ -14,7 +14,12 @@ def main(): Unit =
   println()
 
   println("(λx((xy)((λu((zu)(λv(vy))))z))) to nameless")
-  println(deleteNames(named.parseString("(λx((xy)((λu((zu)(λv(vy))))z)))"), Vector(named.Var('y'), named.Var('x'), named.Var('z'))))
+  println(
+    deleteNames(
+      named.parseString("(λx((xy)((λu((zu)(λv(vy))))z)))"),
+      Vector(named.Var('y'), named.Var('x'), named.Var('z'))
+    )
+  )
   println()
 
   println("(0(λ((01)(λ((01)2))))) to named")
@@ -27,7 +32,10 @@ def main(): Unit =
   println()
 
   println("(λx((xy)((λu((zu)(λv(vy))))z))) -> nameless -> named")
-  val withoutNames = deleteNames(named.parseString("(λx((xy)((λu((zu)(λv(vy))))z)))"), Vector(named.Var('y'), named.Var('x'), named.Var('z')))
+  val withoutNames = deleteNames(
+    named.parseString("(λx((xy)((λu((zu)(λv(vy))))z)))"),
+    Vector(named.Var('y'), named.Var('x'), named.Var('z'))
+  )
   println(addNames(withoutNames, Vector(named.Var('y'), named.Var('x'), named.Var('z'))))
   println()
 
@@ -36,11 +44,11 @@ def main(): Unit =
   val x = 0
   val n = nameless.parseString("(2(λ((01)3)))")
   val mSubn = nameless.sub(m, x, n)
-  
+
   val m1 = addNames(m, Vector(named.Var('y'), named.Var('x'), named.Var('z')))
   val n1 = addNames(n, Vector(named.Var('y'), named.Var('x'), named.Var('z')))
   val m1Subn1 = named.currySub(m1, 'y', n1)
-  
+
   println("(0(λ((01)(λ((01)2)))))[0 -> (2(λ((01)3)))]")
   println(mSubn)
   println()
@@ -51,7 +59,6 @@ def main(): Unit =
 
   println("(λy(λx(xy))) and (λx(λy(yx))) should be alpha equivalent")
   println(named.areAlphaEq(named.parseString("(λy(λx(xy)))"), named.parseString("(λx(λy(yx)))")))
-
 
   println(named.fullReduction(named.normalReduction)(named.parseString("((λxx)(λyy))")))
   println(named.fullReduction(named.normalReduction)(named.parseString("((λx(λyy))((λzz)(λaa)))")))

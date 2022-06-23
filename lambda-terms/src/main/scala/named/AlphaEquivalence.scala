@@ -8,4 +8,3 @@ def areAlphaEq(a: Term, b: Term): Boolean = (a, b) match
     val z = newVar(vars(m), vars(n))
     areAlphaEq(naiveSub(m, x, z), naiveSub(n, y, z))
   case _ => false
-
