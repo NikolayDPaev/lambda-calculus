@@ -8,3 +8,8 @@ Program implementations for the lambda calculus and proof theory course
 - Substitution for nameless terms
 - Translation between named and nameless terms and vice versa
 - Implementation of Normal and Applicative reduction strategies
+
+### Minlog proofs of:
+- DeMorgan laws
+- classical logic in minimal theorems
+- and other
